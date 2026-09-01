@@ -6,12 +6,18 @@
    ============================================================================ */
 
 /* ── Your links ─────────────────────────────────────────────────────────── */
+/* Bump RESUME_VERSION (any change — date, number, whatever) every time you
+   replace the PDF at assets/resume/. The file's URL otherwise never changes,
+   so phones, in-app browsers (LinkedIn's included), and some CDNs keep
+   serving the old cached PDF even after you've uploaded a new one — this
+   query string forces them to treat it as a new file and fetch it fresh. */
+const RESUME_VERSION = "2026-09-01";
 const SITE_LINKS = {
   github: "https://github.com/harpreet-03",
   linkedin: "https://www.linkedin.com/in/harpreet16/",
   email: "harpreet162004@gmail.com",
   phone: "+91-7696224407",
-  resume: "assets/resume/Harpreet_Singh_Resume.pdf",
+  resume: `./assets/resume/Harpreet_Singh_Resume.pdf?v=${RESUME_VERSION}`,
 };
 
 
@@ -172,13 +178,7 @@ const CERTIFICATIONS = [
       "assets/certifications/thumbs/Machine_Learning_Specialization_thumb.jpg",
   },
   
-  // {
-  //   issuer: "Codio · Coursera ",
-  //   name: "Programming in C++: Specialization",
-  //   meta: "Feb 2024",
-  //   file: "./assets/certifications/cpp_certificate.pdf",
-  //   image: "./assets/certifications/thumbs/cpp.png",
-  // }
+  
 ];
 
 /* ── Publication ───────────────────────────────────────────────────────── */
