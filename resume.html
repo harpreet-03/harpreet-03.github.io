@@ -1,0 +1,168 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Harpreet Singh · Resume</title>
+    <meta name="description" content="Harpreet Singh — AI Engineer. Resume." />
+    <meta name="robots" content="index,follow" />
+    <meta name="theme-color" content="#1d1d1c" />
+
+    <link
+      rel="icon"
+      href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%231d1d1c'/%3E%3Ctext x='16' y='23' font-family='Georgia,serif' font-size='16' font-weight='700' fill='%23f3eee2' text-anchor='middle'%3EHS%3C/text%3E%3C/svg%3E"
+    />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500&family=Inter:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/resume.css" />
+  </head>
+
+  <body>
+    <!-- ============================================================
+     TOP BAR — back link
+     ============================================================ -->
+    <header class="r-topbar">
+      <div class="r-topbar-inner">
+        <a href="index.html" class="r-back">
+          <span class="r-back-arrow">←</span>
+          <span>Portfolio</span>
+        </a>
+      </div>
+    </header>
+
+    <!-- ============================================================
+     RESUME
+     ============================================================ -->
+    <main class="r-wrap">
+      <!-- Header / identity -->
+      <section class="r-header">
+        <div>
+          <div class="r-eyebrow">Resume</div>
+          <h1>Harpreet Singh</h1>
+          <p class="r-role">AI Engineer · LLM Systems · Agentic AI · Backend</p>
+        </div>
+
+        <div class="r-contact" id="rContact">
+          <!-- populated by js/resume.js from SITE_LINKS -->
+        </div>
+      </section>
+
+      <!-- Summary -->
+      <section class="r-section">
+        <h2>Summary</h2>
+        <p>
+          B.Tech CSE graduate (Class of 2026) and AI Intern focused
+          on production-oriented LLM systems, retrieval pipelines, agentic
+          workflows, and backend systems. Scopus-indexed researcher in
+          multilingual NLP and selected for Google's Nibbler AI Safety Initiative.
+        </p>
+      </section>
+
+      <!-- Experience -->
+      <section class="r-section">
+        <h2>Experience</h2>
+        <div class="r-entry">
+          <div class="r-entry-head">
+            <h3>AI Intern</h3>
+            <span class="r-entry-date">Jul 2026 – Present</span>
+          </div>
+          <div class="r-entry-sub">FlyRank AI</div>
+        </div>
+      </section>
+
+      <!-- Education -->
+      <section class="r-section">
+        <h2>Education</h2>
+        <div class="r-entry">
+          <div class="r-entry-head">
+            <h3>B.Tech, Computer Science &amp; Engineering</h3>
+            <span class="r-entry-date">Class of 2026</span>
+          </div>
+          <div class="r-entry-sub">Lovely Professional University</div>
+        </div>
+      </section>
+
+      <!-- Skills -->
+      <section class="r-section">
+        <h2>Technologies</h2>
+        <div class="r-tags">
+          <span>Python</span>
+          <span>Java</span>
+          <span>PyTorch</span>
+          <span>TensorFlow</span>
+          <span>LangChain</span>
+          <span>LangGraph</span>
+          <span>FastAPI</span>
+          <span>Docker</span>
+          <span>GCP</span>
+          <span>PostgreSQL</span>
+        </div>
+      </section>
+
+      <!-- Projects (rendered from data.js → PROJECTS) -->
+      <section class="r-section">
+        <h2>Selected Projects</h2>
+        <div class="r-projects" id="rProjects">
+          <!-- populated by js/resume.js -->
+        </div>
+      </section>
+
+      <!-- Publication -->
+      <section class="r-section">
+        <h2>Research &amp; Publication</h2>
+        <div class="r-entry" id="rPublication">
+          <!-- populated by js/resume.js from PUBLICATION -->
+        </div>
+      </section>
+
+      <!-- Recognition -->
+      <section class="r-section">
+        <h2>Recognition</h2>
+        <div class="r-recognition">
+          <div class="r-entry">
+            <div class="r-entry-head">
+              <h3>Scopus-Indexed Research</h3>
+            </div>
+            <div class="r-entry-sub">Grenze International Journal · 2025</div>
+          </div>
+          <div class="r-entry">
+            <div class="r-entry-head">
+              <h3>M-STEM Scholar</h3>
+            </div>
+            <div class="r-entry-sub">Marvell · Top 100 nationwide · 2026</div>
+          </div>
+          <div class="r-entry">
+            <div class="r-entry-head">
+              <h3>AI Safety</h3>
+            </div>
+            <div class="r-entry-sub">Google Nibbler · Top 120 of 8,000+</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Certifications (rendered from data.js → CERTIFICATIONS) -->
+      <section class="r-section">
+        <h2>Certifications</h2>
+        <div class="r-certs" id="rCerts">
+          <!-- populated by js/resume.js -->
+        </div>
+      </section>
+
+      <footer class="r-footer">
+        <a data-link="resume" href="assets/resume/Harpreet_Singh_Resume.pdf" target="_blank" rel="noopener" class="btn">
+          <span>Download PDF</span>
+        </a>
+      </footer>
+    </main>
+
+    <script src="js/data.js"></script>
+    <script src="js/resume.js"></script>
+  </body>
+</html>

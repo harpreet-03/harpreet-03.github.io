@@ -1,0 +1,512 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Harpreet Singh · AI Engineer</title>
+<meta name="description" content="Harpreet Singh. AI Engineer building production-oriented LLM systems, RAG pipelines, agentic workflows, and backend services. Scopus-indexed NLP researcher." />
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%231d1d1c'/%3E%3Ctext x='16' y='23' font-family='Georgia,serif' font-size='16' font-weight='700' fill='%23f3eee2' text-anchor='middle'%3EHS%3C/text%3E%3C/svg%3E" />
+
+<meta property="og:type" content="website" />
+<meta property="og:title" content="Harpreet Singh · AI Engineer" />
+<meta property="og:description" content="AI Engineer building production-oriented LLM systems, RAG pipelines, agentic workflows, and backend services. Scopus-indexed NLP researcher." />
+<meta property="og:image" content="assets/images/og-image.png" />
+<meta property="og:url" content="https://harpreet-03.github.io/" />
+<meta name="theme-color" content="#1d1d1c" />
+<link rel="canonical" href="https://harpreet-03.github.io/" />
+
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400&family=JetBrains+Mono:wght@400;500&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="css/style.css" />
+
+<script>
+  tailwind.config = {
+    theme: {
+      extend: {
+        colors: {
+          dark: '#1d1d1c',
+          cream: '#f4f1ea',
+          surface: '#f3eee2',
+          moss: '#4f5343',
+          'moss-dark': '#3a3d31',
+          sand: '#d4c19c',
+          ink: '#222222',
+        },
+        fontFamily: {
+          serif: ['Fraunces', 'serif'],
+          mono: ['"JetBrains Mono"', 'monospace'],
+          sans: ['Inter', 'sans-serif'],
+        }
+      }
+    }
+  }
+</script>
+</head>
+<body class="relative bg-cream text-dark font-sans overflow-x-hidden selection:bg-moss selection:text-surface">
+
+  <!-- Loader -->
+  <div id="loader">
+    <span class="loader-word">HS</span>
+  </div>
+
+  <!-- WebGL ambient background -->
+  <canvas id="webgl-bg" class="fixed inset-0 w-full h-full z-0 pointer-events-none"></canvas>
+
+  <!-- Navigation -->
+  <nav class="fixed top-0 left-0 w-full z-50 px-6 lg:px-12 flex justify-between items-center bg-dark/70 backdrop-blur-md text-surface py-4 border-b border-white/10">
+    <a href="#top" class="font-serif text-xl tracking-tight font-medium">Harpreet Singh</a>
+    <div class="hidden lg:flex items-center gap-8 font-mono text-xs tracking-widest uppercase">
+      <a href="#about" class="transition-colors hover:text-white">About</a>
+      <a href="#projects" class="transition-colors hover:text-white">Projects</a>
+      <a href="#research" class="transition-colors hover:text-white">Research</a>
+      <a href="#certifications" class="transition-colors hover:text-white">Certifications</a>
+      <a href="#contact" class="transition-colors hover:text-white">Contact</a>
+    </div>
+    <div class="hidden lg:flex items-center gap-4">
+      <div class="magnetic-wrap">
+        <a data-link="resume" href="assets/resume/Harpreet_Singh_Resume.pdf" target="_blank" rel="noopener" class="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-surface text-dark font-mono text-xs tracking-widest uppercase hover:bg-white transition-colors">
+          Resume
+        </a>
+      </div>
+    </div>
+    <button id="navBurger" class="lg:hidden magnetic-wrap w-11 h-11 rounded-full border flex items-center justify-center transition-colors border-white/20 hover:bg-white/10" aria-label="Open menu" aria-expanded="false">
+      <iconify-icon icon="solar:hamburger-menu-linear" width="22"></iconify-icon>
+    </button>
+  </nav>
+
+  <div id="navMobileMenu" class="lg:hidden fixed top-[64px] left-0 w-full z-40 bg-dark text-surface px-6 border-b border-white/10">
+    <div class="flex flex-col py-4 font-mono text-xs tracking-widest uppercase gap-1">
+      <a href="#about" class="py-3 border-b border-white/5">About</a>
+      <a href="#projects" class="py-3 border-b border-white/5">Projects</a>
+      <a href="#research" class="py-3 border-b border-white/5">Research</a>
+      <a href="#certifications" class="py-3 border-b border-white/5">Certifications</a>
+      <a href="#contact" class="py-3 border-b border-white/5">Contact</a>
+      <a data-link="resume" href="assets/resume/Harpreet_Singh_Resume.pdf" target="_blank" rel="noopener" class="py-3">Resume ↗</a>
+    </div>
+  </div>
+
+  <!-- Hero -->
+  <section id="top" class="relative z-10 min-h-screen flex flex-col items-center justify-center pt-24 px-6 text-center overflow-hidden bg-dark">
+    <div class="hero-frame">
+      <div class="hero-bg-pattern"></div>
+      <div class="hero-bg-photo" data-bg="./assets/images/hero-bg.jpg"></div>
+      <div class="hero-bg-overlay"></div>
+    </div>
+
+    <div class="gsap-hero-el hero-glass-badge uppercase mb-8 relative z-10">
+      AI Engineer &amp; Backend Builder
+    </div>
+    <h1 class="gsap-hero-el font-serif text-5xl sm:text-6xl lg:text-8xl tracking-tight leading-[1.02] mb-8 max-w-5xl relative z-10 text-surface">
+      Building systems
+      <br class="hidden lg:block">
+      that reason.
+    </h1>
+    <p class="gsap-hero-el font-sans text-base lg:text-lg max-w-xl font-light mb-12 relative z-10 text-surface/70 leading-relaxed">
+      I build the systems around the model — retrieval, agentic workflows,
+      and the backend services that make AI useful beyond the demo.
+    </p>
+    <div class="gsap-hero-el flex flex-col sm:flex-row items-center gap-6 relative z-10">
+      <div class="magnetic-wrap">
+        <a href="#projects" class="inline-flex items-center justify-center gap-4 px-8 py-4 rounded-full transition-all duration-300 shadow-xl group bg-surface text-dark hover:bg-white">
+          <span class="font-mono text-xs tracking-widest uppercase">View projects</span>
+          <iconify-icon icon="solar:arrow-right-linear" width="18" class="group-hover:translate-x-1 transition-transform"></iconify-icon>
+        </a>
+      </div>
+      <a href="#about" class="font-mono text-xs tracking-widest uppercase border-b pb-1 transition-colors text-surface border-surface/30 hover:border-surface">
+        More about me
+      </a>
+    </div>
+  </section>
+
+  <!-- Story / About -->
+  <section id="about" class="relative z-10 py-32 px-6 lg:px-12 bg-dark text-surface overflow-hidden" style="scroll-margin-top: var(--nav-h)">
+    <div class="absolute inset-0 matte-noise"></div>
+    <div class="max-w-7xl mx-auto relative z-10 grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-20 items-start mb-28">
+      <div class="gsap-fade-up">
+        <div class="eyebrow uppercase text-surface/50 mb-6">About</div>
+        <div class="w-16 h-16 rounded-full border border-surface/20 flex items-center justify-center mb-10">
+          <iconify-icon icon="solar:cpu-bolt-linear" width="28"></iconify-icon>
+        </div>
+        <h2 class="font-serif text-4xl lg:text-6xl tracking-tight leading-tight mb-8">
+          I don't just
+          <br>
+          build AI.
+        </h2>
+        <p class="text-surface/70 text-base font-light mb-6 leading-relaxed">
+          I build the systems around it — from retrieval and agentic
+          workflows to backend services that make AI useful beyond the demo.
+          Most of the interesting work isn't getting a model to answer well
+          once; it's making the whole system reliable, evaluable, and worth
+          shipping.
+        </p>
+        <p class="text-surface/70 text-base font-light mb-10 leading-relaxed">
+          B.Tech CSE graduate (Class of 2026) from Lovely Professional
+          University, currently an AI Intern at FlyRank AI, with a
+          Scopus-indexed publication in multilingual NLP.
+        </p>
+        <div class="flex flex-wrap gap-2 mb-10">
+          <span class="eyebrow uppercase bg-white/5 border border-white/10 px-4 py-2 rounded-full text-surface/60">LLM Systems</span>
+          <span class="eyebrow uppercase bg-white/5 border border-white/10 px-4 py-2 rounded-full text-surface/60">RAG &amp; Retrieval</span>
+          <span class="eyebrow uppercase bg-white/5 border border-white/10 px-4 py-2 rounded-full text-surface/60">Agentic Workflows</span>
+          <span class="eyebrow uppercase bg-white/5 border border-white/10 px-4 py-2 rounded-full text-surface/60">Backend Systems</span>
+        </div>
+        <div class="grid grid-cols-2 sm:grid-cols-4 gap-6 border-t border-surface/10 pt-8">
+          <div>
+            <div class="font-serif text-2xl lg:text-3xl mb-2">8.15</div>
+            <div class="eyebrow uppercase text-surface/50">CGPA</div>
+          </div>
+          <div>
+            <div class="font-serif text-2xl lg:text-3xl mb-2">1</div>
+            <div class="eyebrow uppercase text-surface/50">Scopus paper</div>
+          </div>
+          <div>
+            <div class="font-serif text-2xl lg:text-3xl mb-2">Top 100</div>
+            <div class="eyebrow uppercase text-surface/50">M-STEM Scholar</div>
+          </div>
+          <div>
+            <div class="font-serif text-2xl lg:text-3xl mb-2">Top 120</div>
+            <div class="eyebrow uppercase text-surface/50">of 8,000+ · Nibbler</div>
+          </div>
+        </div>
+      </div>
+      <div class="gsap-scale-up">
+        <div class="relative h-[520px] w-full rounded-[32px] overflow-hidden matte-noise">
+          <img src="./assets/images/profile.jpg" alt="Harpreet Singh" class="absolute inset-0 w-full h-full object-cover object-top"
+            onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+          <div class="absolute inset-0 w-full h-full items-center justify-center bg-[#262622] text-surface/20 font-serif text-8xl" style="display:none">HS</div>
+          <div class="absolute inset-0 border border-white/10 rounded-[32px] gradient-border-inset z-10"></div>
+          <span class="absolute top-6 left-6 z-20 eyebrow uppercase bg-dark/70 backdrop-blur-sm border border-white/10 px-4 py-2 rounded-full text-surface/80">
+            Currently · AI Intern @ FlyRank AI
+          </span>
+        </div>
+        <div class="flex items-center justify-between border-t border-surface/10 mt-6 pt-6">
+          <div>
+            <strong class="font-serif text-lg block mb-1">Harpreet Singh</strong>
+            <span class="eyebrow uppercase text-surface/50">AI Engineer · Lovely Professional University</span>
+          </div>
+          <span class="eyebrow uppercase bg-white/5 border border-white/10 px-4 py-2 rounded-full text-surface/60 whitespace-nowrap">Class of 2026</span>
+        </div>
+      </div>
+    </div>
+
+
+    <!-- Skills -->
+    <div class="max-w-7xl mx-auto relative z-10 gsap-fade-up">
+      <div class="flex items-end justify-between mb-8 flex-wrap gap-4">
+        <div>
+          <div class="eyebrow uppercase text-surface/50 mb-3">What I work with</div>
+          <h3 class="font-serif text-3xl lg:text-4xl">Core stack.</h3>
+        </div>
+      </div>
+      <div class="skill-field bento-grid" id="skillField"></div>
+    </div>
+  </section>
+
+  <!-- Projects / Shop -->
+  <section id="projects" class="relative z-10 py-32 px-6 lg:px-12 bg-cream w-full" style="scroll-margin-top: var(--nav-h)">
+    <div class="max-w-7xl mx-auto">
+      <div class="flex items-end justify-between mb-16 flex-wrap gap-6 gsap-fade-up">
+        <div>
+          <div class="eyebrow uppercase text-dark/50 mb-3">Selected work</div>
+          <h2 class="font-serif text-4xl lg:text-6xl tracking-tight">Projects.</h2>
+        </div>
+        <div class="flex items-center gap-6">
+          <a data-link="github" href="https://github.com/harpreet-03" target="_blank" rel="noopener" class="font-mono text-xs tracking-widest uppercase border-b pb-1 border-dark/30 hover:border-dark transition-colors">
+            View all on GitHub ↗
+          </a>
+          <div class="hidden sm:flex items-center gap-3">
+            <button id="pPrev" type="button" aria-label="Previous project" class="w-11 h-11 rounded-full border border-dark/20 flex items-center justify-center hover:bg-dark hover:text-cream hover:border-dark transition-colors">
+              <iconify-icon icon="solar:arrow-left-linear" width="18"></iconify-icon>
+            </button>
+            <button id="pNext" type="button" aria-label="Next project" class="w-11 h-11 rounded-full border border-dark/20 flex items-center justify-center hover:bg-dark hover:text-cream hover:border-dark transition-colors">
+              <iconify-icon icon="solar:arrow-right-linear" width="18"></iconify-icon>
+            </button>
+          </div>
+        </div>
+      </div>
+      <div id="grid" class="flex gap-6 overflow-x-auto hide-scrollbar snap-x snap-mandatory pb-4 -mx-6 px-6 lg:-mx-12 lg:px-12"></div>
+    </div>
+  </section>
+
+  <!-- Engineering focus -->
+  <section class="relative z-10 py-32 px-6 lg:px-12 bg-dark text-surface overflow-hidden">
+    <div class="absolute inset-0 matte-noise"></div>
+    <div class="max-w-7xl mx-auto relative z-10">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-end mb-14 gsap-fade-up">
+        <h2 class="font-serif text-4xl lg:text-6xl tracking-tight leading-tight">What I'm<br><em class="italic">shipping.</em></h2>
+        <p class="text-surface/70 font-light leading-relaxed">
+          A compact view of the engineering problems I like to work on — from
+          grounded generation to the backend systems underneath it.
+        </p>
+      </div>
+      <div class="flex flex-wrap gap-3 mb-14 gsap-fade-up">
+        <span class="eyebrow uppercase bg-white/5 border border-white/10 px-4 py-2 rounded-full text-surface/70">AI Intern · FlyRank AI</span>
+        <span class="eyebrow uppercase bg-white/5 border border-white/10 px-4 py-2 rounded-full text-surface/70">Google Nibbler AI Safety Initiative</span>
+        <span class="eyebrow uppercase bg-white/5 border border-white/10 px-4 py-2 rounded-full text-surface/70">Scopus-indexed NLP Research</span>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <article class="focus-card gsap-fade-up">
+          <div class="flex items-center justify-between mb-8">
+            <span class="eyebrow text-surface/40">01</span>
+            <iconify-icon icon="solar:arrow-right-up-linear" width="18" class="text-surface/40"></iconify-icon>
+          </div>
+          <span class="eyebrow uppercase text-sand block mb-3">LLM Applications</span>
+          <h3 class="font-serif text-2xl mb-3">Make models useful.</h3>
+          <p class="text-surface/60 text-sm font-light leading-relaxed mb-6">RAG, agent orchestration, prompt systems and context-aware interfaces built around real workflows.</p>
+          <div class="flex flex-wrap gap-2">
+            <span class="research-tag bg-white/5 border border-white/10 px-3 py-1.5 rounded-full text-surface/60">RAG</span>
+            <span class="research-tag bg-white/5 border border-white/10 px-3 py-1.5 rounded-full text-surface/60">Agents</span>
+            <span class="research-tag bg-white/5 border border-white/10 px-3 py-1.5 rounded-full text-surface/60">Evaluation</span>
+          </div>
+        </article>
+        <article class="focus-card gsap-fade-up">
+          <div class="flex items-center justify-between mb-8">
+            <span class="eyebrow text-surface/40">02</span>
+            <iconify-icon icon="solar:arrow-right-up-linear" width="18" class="text-surface/40"></iconify-icon>
+          </div>
+          <span class="eyebrow uppercase text-sand block mb-3">Backend Systems</span>
+          <h3 class="font-serif text-2xl mb-3">Make them ship.</h3>
+          <p class="text-surface/60 text-sm font-light leading-relaxed mb-6">API-first services, retrieval infrastructure, databases and deployment tooling that survive beyond a demo.</p>
+          <div class="flex flex-wrap gap-2">
+            <span class="research-tag bg-white/5 border border-white/10 px-3 py-1.5 rounded-full text-surface/60">FastAPI</span>
+            <span class="research-tag bg-white/5 border border-white/10 px-3 py-1.5 rounded-full text-surface/60">Docker</span>
+            <span class="research-tag bg-white/5 border border-white/10 px-3 py-1.5 rounded-full text-surface/60">GCP</span>
+          </div>
+        </article>
+        <article class="focus-card gsap-fade-up">
+          <div class="flex items-center justify-between mb-8">
+            <span class="eyebrow text-surface/40">03</span>
+            <iconify-icon icon="solar:arrow-right-up-linear" width="18" class="text-surface/40"></iconify-icon>
+          </div>
+          <span class="eyebrow uppercase text-sand block mb-3">Research &amp; Evaluation</span>
+          <h3 class="font-serif text-2xl mb-3">Make results measurable.</h3>
+          <p class="text-surface/60 text-sm font-light leading-relaxed mb-6">Multilingual NLP research, experiments, baselines and evaluation loops that expose where systems fail.</p>
+          <div class="flex flex-wrap gap-2">
+            <span class="research-tag bg-white/5 border border-white/10 px-3 py-1.5 rounded-full text-surface/60">NLP</span>
+            <span class="research-tag bg-white/5 border border-white/10 px-3 py-1.5 rounded-full text-surface/60">TensorFlow</span>
+            <span class="research-tag bg-white/5 border border-white/10 px-3 py-1.5 rounded-full text-surface/60">Metrics</span>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- Research / Publication -->
+  <section id="research" class="relative z-10 py-32 px-6 lg:px-12 bg-cream" style="scroll-margin-top: var(--nav-h)">
+    <div class="max-w-7xl mx-auto">
+      <div class="eyebrow uppercase text-dark/50 mb-3 gsap-fade-up">Research · Published · Scopus Indexed</div>
+      <h2 class="font-serif text-4xl lg:text-6xl tracking-tight mb-14 gsap-fade-up">Indian Language<br>Identification.</h2>
+
+      <div class="grid grid-cols-1 lg:grid-cols-[1fr_400px] gap-10 items-start">
+        <div class="gsap-fade-up bg-white/40 border border-dark/10 rounded-[28px] p-8 lg:p-10">
+          <p class="text-dark/70 text-base lg:text-lg font-light leading-relaxed mb-8" id="pubDesc"></p>
+          <div class="grid grid-cols-3 gap-6 border-t border-dark/10 pt-6 mb-10">
+            <div>
+              <span class="eyebrow uppercase text-dark/40 block mb-2">Venue</span>
+              <strong class="font-serif text-lg">GIJET</strong>
+            </div>
+            <div>
+              <span class="eyebrow uppercase text-dark/40 block mb-2">Domain</span>
+              <strong class="font-serif text-lg">NLP</strong>
+            </div>
+            <div>
+              <span class="eyebrow uppercase text-dark/40 block mb-2">Index</span>
+              <strong class="font-serif text-lg">Scopus</strong>
+            </div>
+          </div>
+          <div class="grid grid-cols-2 sm:grid-cols-4 gap-6 border-t border-dark/10 pt-6">
+            <div>
+              <div class="font-serif text-2xl mb-1">4</div>
+              <span class="eyebrow uppercase text-dark/40">Models compared</span>
+            </div>
+            <div>
+              <div class="font-serif text-2xl mb-1">17</div>
+              <span class="eyebrow uppercase text-dark/40">Languages</span>
+            </div>
+            <div>
+              <div class="font-serif text-2xl mb-1">96.52%</div>
+              <span class="eyebrow uppercase text-dark/40">Best accuracy</span>
+            </div>
+            <div>
+              <div class="font-serif text-2xl mb-1">2025</div>
+              <span class="eyebrow uppercase text-dark/40">Published</span>
+            </div>
+          </div>
+        </div>
+
+        <article class="bg-[#1d1d1c] matte-noise text-surface rounded-[28px] p-8 relative overflow-hidden gsap-fade-up">
+          <div class="relative z-10">
+            <div class="flex items-center justify-between mb-6">
+              <span class="eyebrow text-surface/40">01</span>
+              <span class="eyebrow uppercase bg-moss/60 px-3 py-1.5 rounded-full text-surface/80">Published</span>
+            </div>
+            <h3 class="font-serif text-xl mb-4 leading-snug">Identification of Indian Languages Using NB, CNN, LSTM and HMM</h3>
+            <div class="flex flex-wrap gap-2 mb-8" id="pubStack"></div>
+            <div class="flex flex-col gap-3">
+              <a data-link="pub-paper" href="#" target="_blank" rel="noopener" class="flex items-center justify-between border-b border-white/10 pb-3 text-sm hover:text-sand transition-colors">
+                Read the published paper <span>↗</span>
+              </a>
+              <a data-link="pub-pdf" href="#" target="_blank" rel="noopener" class="flex items-center justify-between border-b border-white/10 pb-3 text-sm hover:text-sand transition-colors">
+                PDF copy <span>↗</span>
+              </a>
+              <a data-link="pub-scholar" href="#" target="_blank" rel="noopener" class="flex items-center justify-between text-sm hover:text-sand transition-colors">
+                Google Scholar <span>↗</span>
+              </a>
+            </div>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- Certifications -->
+  <section id="certifications" class="relative z-10 py-32 px-6 lg:px-12 bg-[#eae5d9]" style="scroll-margin-top: var(--nav-h)">
+    <div class="max-w-7xl mx-auto">
+      <div class="flex items-end justify-between mb-14 flex-wrap gap-6 gsap-fade-up">
+        <div>
+          <div class="eyebrow uppercase text-dark/50 mb-3">Certifications</div>
+          <h2 class="font-serif text-4xl lg:text-6xl tracking-tight">Always<br>learning.</h2>
+        </div>
+        <p class="text-dark/60 font-light max-w-xs">Selected certifications spanning machine learning, generative AI, and full-stack development.</p>
+      </div>
+      <div id="certGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6"></div>
+    </div>
+  </section>
+
+  <!-- Contact -->
+  <section id="contact" class="relative z-10 py-32 px-6 lg:px-12 bg-dark text-surface rounded-t-[44px] lg:rounded-t-[80px] -mt-11 lg:-mt-20 overflow-hidden" style="scroll-margin-top: var(--nav-h)">
+    <div class="absolute inset-0 matte-noise"></div>
+    <div class="max-w-4xl mx-auto relative z-10 text-center">
+      <div class="eyebrow uppercase text-surface/50 mb-6 gsap-fade-up">Contact</div>
+      <h2 class="font-serif text-4xl lg:text-6xl tracking-tight mb-8 gsap-fade-up">Let's build<br>something.</h2>
+      <p class="text-surface/70 font-light max-w-lg mx-auto mb-12 leading-relaxed gsap-fade-up">
+        Open to AI engineering roles, research collaborations, and interesting
+        problems. The fastest way to reach me is by email.
+      </p>
+      <div class="flex flex-wrap items-center justify-center gap-6 gsap-fade-up">
+        <div class="magnetic-wrap">
+          <a href="mailto:harpreet162004@gmail.com?subject=Portfolio%20Inquiry" class="inline-flex items-center gap-3 px-8 py-4 rounded-full bg-surface text-dark font-mono text-xs tracking-widest uppercase hover:bg-white transition-colors">
+            Email me ↗
+          </a>
+        </div>
+        <a data-link="linkedin" href="https://www.linkedin.com/in/harpreet16/" target="_blank" rel="noopener" class="font-mono text-xs tracking-widest uppercase border-b pb-1 border-surface/30 hover:border-surface transition-colors">LinkedIn ↗</a>
+        <a data-link="github" href="https://github.com/harpreet-03" target="_blank" rel="noopener" class="font-mono text-xs tracking-widest uppercase border-b pb-1 border-surface/30 hover:border-surface transition-colors">GitHub ↗</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="relative z-10 bg-dark text-surface pt-20 pb-10 px-6 lg:px-12 overflow-hidden">
+    <div class="max-w-7xl mx-auto relative z-10">
+      <div class="grid grid-cols-1 lg:grid-cols-4 gap-12 lg:gap-8 mb-16">
+        <div class="col-span-1 lg:col-span-2">
+          <div class="font-serif text-2xl tracking-tight mb-4">Harpreet Singh</div>
+          <p class="text-surface/50 font-light max-w-sm leading-relaxed">AI Engineer building production-oriented LLM systems, RAG pipelines, agentic workflows, and backend services.</p>
+        </div>
+        <div>
+          <h4 class="eyebrow uppercase text-surface/40 mb-5">Explore</h4>
+          <div class="flex flex-col gap-3 font-light text-sm">
+            <a href="#about" class="hover:text-sand transition-colors">About</a>
+            <a href="#projects" class="hover:text-sand transition-colors">Projects</a>
+            <a href="#research" class="hover:text-sand transition-colors">Research</a>
+            <a href="#certifications" class="hover:text-sand transition-colors">Certifications</a>
+          </div>
+        </div>
+        <div>
+          <h4 class="eyebrow uppercase text-surface/40 mb-5">Connect</h4>
+          <div class="flex flex-col gap-3 font-light text-sm">
+            <a data-link="github" href="https://github.com/harpreet-03" target="_blank" rel="noopener" class="hover:text-sand transition-colors">GitHub</a>
+            <a data-link="linkedin" href="https://www.linkedin.com/in/harpreet16/" target="_blank" rel="noopener" class="hover:text-sand transition-colors">LinkedIn</a>
+            <a href="mailto:harpreet162004@gmail.com" class="hover:text-sand transition-colors">Email</a>
+            <a href="resume.html" class="hover:text-sand transition-colors">Resume ↗</a>
+          </div>
+        </div>
+      </div>
+      <div class="flex flex-col lg:flex-row items-center justify-between pt-8 border-t border-surface/10 text-xs font-mono tracking-widest uppercase text-surface/40">
+        <p>© 2026 Harpreet Singh</p>
+        <p class="mt-4 lg:mt-0">Built &amp; designed with care</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Project detail modal -->
+  <div class="pmodal" id="pModal" aria-hidden="true">
+    <div class="pmodal-backdrop" data-pmodal-close></div>
+    <div class="pmodal-panel" role="dialog" aria-modal="true" aria-labelledby="pmTitle">
+      <div class="pmodal-media-wrap">
+        <div class="pmodal-media" id="pmMedia"></div>
+        <button class="pmodal-icon-btn pmodal-play-btn" id="pmPlayBtn" type="button" aria-label="Pause video" style="display:none">
+          <svg class="icon-pause" viewBox="0 0 24 24" width="15" height="15" fill="currentColor"><rect x="6" y="5" width="4" height="14" rx="1"/><rect x="14" y="5" width="4" height="14" rx="1"/></svg>
+          <svg class="icon-play" viewBox="0 0 24 24" width="15" height="15" fill="currentColor" style="display:none"><path d="M8 5v14l11-7z"/></svg>
+        </button>
+        <span class="pmodal-pause-hint" id="pmPauseHint">Click to resume</span>
+        <span class="pmodal-badge" id="pmBadge"></span>
+        <div class="pmodal-more-wrap">
+          <button class="pmodal-icon-btn pmodal-more" id="pmMore" type="button" aria-label="More options" aria-haspopup="true" aria-expanded="false">
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor">
+              <circle cx="5" cy="12" r="1.8" /><circle cx="12" cy="12" r="1.8" /><circle cx="19" cy="12" r="1.8" />
+            </svg>
+          </button>
+          <div class="pmodal-more-menu" id="pmMoreMenu" role="menu">
+            <button type="button" data-action="copy" role="menuitem">Copy link</button>
+            <button type="button" data-action="open" role="menuitem">Open repo in new tab</button>
+          </div>
+        </div>
+        <button class="pmodal-icon-btn pmodal-close" id="pmClose" type="button" aria-label="Close project details">
+          <svg viewBox="0 0 24 24" width="15" height="15" fill="none">
+            <path d="M5 5l14 14M19 5L5 19" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" />
+          </svg>
+        </button>
+      </div>
+      <div class="pmodal-body">
+        <div class="pmodal-headline" id="pmHeadline"></div>
+        <h3 id="pmTitle"></h3>
+        <div class="pmodal-sub" id="pmSub"></div>
+        <p class="pmodal-desc" id="pmDesc"></p>
+        <div class="pmodal-stack" id="pmStack"></div>
+        <div class="pmodal-divider"></div>
+        <div class="pmodal-action-row">
+          <a class="pmodal-cta" id="pmLink" target="_blank" rel="noopener">
+            <span class="pmodal-cta-icon">
+              <svg viewBox="0 0 24 24" width="15" height="15" fill="currentColor"><path d="M8 5v14l11-7z" /></svg>
+            </span>
+            <span class="pmodal-cta-text">
+              <strong>View project</strong>
+              <small id="pmLinkHost"></small>
+            </span>
+          </a>
+          <div class="pmodal-icon-actions">
+            <button class="pmodal-icon-btn" id="pmCopyBtn" type="button" aria-label="Copy project link">
+              <svg viewBox="0 0 24 24" width="15" height="15" fill="none">
+                <path d="M9.5 9.5h8a1.5 1.5 0 0 1 1.5 1.5v8a1.5 1.5 0 0 1-1.5 1.5h-8A1.5 1.5 0 0 1 8 19V11a1.5 1.5 0 0 1 1.5-1.5Z" stroke="currentColor" stroke-width="1.5" />
+                <path d="M6 14.5H5.5A1.5 1.5 0 0 1 4 13V5a1.5 1.5 0 0 1 1.5-1.5H13A1.5 1.5 0 0 1 14.5 5v.5" stroke="currentColor" stroke-width="1.5" />
+              </svg>
+            </button>
+            <a class="pmodal-icon-btn" id="pmDemoBtn" target="_blank" rel="noopener" aria-label="Open live demo" style="display: none">
+              <svg viewBox="0 0 24 24" width="15" height="15" fill="none">
+                <path d="M14 4h6v6M20 4l-8.5 8.5M9 5H6a2 2 0 0 0-2 2v11a2 2 0 0 0 2 2h11a2 2 0 0 0 2-2v-3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+              </svg>
+            </a>
+          </div>
+        </div>
+        <div class="pmodal-divider"></div>
+        <div class="pmodal-stats">
+          <div><span>Category</span><strong id="pmStatCategory"></strong></div>
+          <div><span>Stack</span><strong id="pmStatStack"></strong></div>
+          <div><span>Status</span><strong id="pmStatStatus"></strong></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/data.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>

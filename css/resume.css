@@ -1,0 +1,433 @@
+/* ============================================================================
+   RESUME PAGE
+   Self-contained theme system (light/dark), scoped to this page only via
+   [data-theme] on <html> — doesn't touch the main portfolio's --ink/--bone
+   variables, which are used both for text color AND deliberately-dark
+   panels there and can't just be inverted wholesale.
+   ============================================================================ */
+
+:root {
+  --r-bg: #f4f1ea;
+  --r-bg-soft: #eae5d9;
+  --r-card: #ffffff;
+  --r-ink: #1d1d1c;
+  --r-mid: #7d7c77;
+  --r-line: rgba(16, 16, 16, 0.12);
+  --r-accent: #4f5343;
+  --r-shadow: rgba(16, 16, 16, 0.08);
+}
+
+html,
+body {
+  background: var(--r-bg);
+}
+
+body {
+  color: var(--r-ink);
+  font: 400 15px/1.65 Inter, system-ui, sans-serif;
+  transition:
+    background 0.4s ease,
+    color 0.4s ease;
+}
+
+/* ── top bar ─────────────────────────────────────────────────────── */
+
+.r-topbar {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  background: var(--r-bg);
+  border-bottom: 1px solid var(--r-line);
+  transition: background 0.4s ease, border-color 0.4s ease;
+}
+
+.r-topbar-inner {
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 16px clamp(18px, 4vw, 28px);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.r-back {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font: 500 11px/1 Inter, sans-serif;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--r-mid);
+  transition: color 0.25s;
+}
+
+.r-back:hover {
+  color: var(--r-ink);
+}
+
+.r-back-arrow {
+  transition: transform 0.25s cubic-bezier(0.6, 0, 0.2, 1);
+}
+
+.r-back:hover .r-back-arrow {
+  transform: translateX(-3px);
+}
+
+/* ── theme toggle ────────────────────────────────────────────────── */
+
+.r-toggle {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: transparent;
+  border: 0;
+  padding: 4px;
+  cursor: pointer;
+  color: var(--r-mid);
+}
+
+.r-toggle-icon {
+  display: flex;
+  width: 15px;
+  height: 15px;
+  transition: color 0.35s ease, opacity 0.35s ease;
+}
+
+.r-toggle-icon svg {
+  width: 100%;
+  height: 100%;
+}
+
+.r-toggle-sun {
+  color: var(--r-accent);
+}
+
+html[data-theme="dark"] .r-toggle-sun {
+  color: var(--r-mid);
+  opacity: 0.5;
+}
+
+.r-toggle-moon {
+  color: var(--r-mid);
+  opacity: 0.5;
+}
+
+html[data-theme="dark"] .r-toggle-moon {
+  color: var(--r-accent);
+  opacity: 1;
+}
+
+.r-toggle-track {
+  position: relative;
+  width: 46px;
+  height: 25px;
+  border-radius: 999px;
+  background: var(--r-line);
+  border: 1px solid var(--r-line);
+  transition: background 0.4s ease;
+}
+
+.r-toggle-thumb {
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 19px;
+  height: 19px;
+  border-radius: 50%;
+  background: var(--r-ink);
+  box-shadow: 0 2px 6px var(--r-shadow);
+  transition:
+    transform 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+    background 0.4s ease;
+}
+
+html[data-theme="dark"] .r-toggle-track {
+  background: rgba(224, 128, 90, 0.22);
+}
+
+html[data-theme="dark"] .r-toggle-thumb {
+  transform: translateX(21px);
+  background: var(--r-accent);
+}
+
+.r-toggle:focus-visible {
+  outline: 2px solid var(--r-accent);
+  outline-offset: 4px;
+  border-radius: 999px;
+}
+
+/* ── layout shell ────────────────────────────────────────────────── */
+
+.r-wrap {
+  max-width: 760px;
+  margin: 0 auto;
+  padding: clamp(28px, 6vh, 56px) clamp(18px, 4vw, 28px) clamp(60px, 10vh, 100px);
+}
+
+/* ── header ──────────────────────────────────────────────────────── */
+
+.r-header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 20px;
+  padding-bottom: 28px;
+  margin-bottom: 32px;
+  border-bottom: 1px solid var(--r-line);
+  transition: border-color 0.4s ease;
+}
+
+.r-eyebrow {
+  font: 500 10px/1 Inter, sans-serif;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--r-accent);
+  margin-bottom: 10px;
+}
+
+.r-header h1 {
+  font-size: clamp(34px, 5vw, 46px);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  line-height: 1;
+}
+
+.r-role {
+  margin-top: 8px;
+  color: var(--r-mid);
+  font-size: 13px;
+  letter-spacing: 0.02em;
+}
+
+.r-contact {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-size: 12px;
+  color: var(--r-mid);
+  text-align: right;
+}
+
+.r-contact a {
+  color: var(--r-mid);
+  transition: color 0.25s;
+}
+
+.r-contact a:hover {
+  color: var(--r-accent);
+}
+
+/* ── sections ────────────────────────────────────────────────────── */
+
+.r-section {
+  margin-bottom: 34px;
+}
+
+.r-section h2 {
+  font: 600 11px/1 Inter, sans-serif;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--r-mid);
+  margin-bottom: 16px;
+}
+
+.r-section > p {
+  max-width: 62ch;
+  color: var(--r-ink);
+  opacity: 0.92;
+}
+
+.r-entry + .r-entry {
+  margin-top: 16px;
+}
+
+.r-entry-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 8px 16px;
+}
+
+.r-entry-head h3 {
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+
+.r-entry-date {
+  font: 500 10.5px/1 Inter, sans-serif;
+  letter-spacing: 0.08em;
+  color: var(--r-mid);
+  white-space: nowrap;
+}
+
+.r-entry-sub {
+  margin-top: 3px;
+  font-size: 12.5px;
+  color: var(--r-mid);
+}
+
+/* ── tags / skills ───────────────────────────────────────────────── */
+
+.r-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.r-tags span {
+  border: 1px solid var(--r-line);
+  padding: 7px 13px;
+  border-radius: 20px;
+  font-size: 11px;
+  color: var(--r-ink);
+  transition: border-color 0.4s ease;
+}
+
+/* ── projects ────────────────────────────────────────────────────── */
+
+.r-projects {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.r-project {
+  background: var(--r-card);
+  border: 1px solid var(--r-line);
+  border-radius: 14px;
+  padding: 18px 20px;
+  transition: background 0.4s ease, border-color 0.4s ease;
+}
+
+.r-project-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 6px 14px;
+}
+
+.r-project-head h3 {
+  font-size: 14.5px;
+  font-weight: 700;
+}
+
+.r-project-head a {
+  font: 500 10px/1 Inter, sans-serif;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--r-accent);
+  white-space: nowrap;
+}
+
+.r-project-sub {
+  margin-top: 2px;
+  font-size: 12px;
+  color: var(--r-mid);
+}
+
+.r-project p {
+  margin-top: 10px;
+  font-size: 13px;
+  color: var(--r-ink);
+  opacity: 0.9;
+}
+
+.r-project-stack {
+  margin-top: 12px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.r-project-stack span {
+  font: 500 9.5px/1 Inter, sans-serif;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--r-mid);
+  border: 1px solid var(--r-line);
+  border-radius: 20px;
+  padding: 5px 10px;
+}
+
+/* ── certifications ──────────────────────────────────────────────── */
+
+.r-certs {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 12px;
+}
+
+.r-cert {
+  border: 1px solid var(--r-line);
+  border-radius: 12px;
+  padding: 14px 16px;
+  transition: border-color 0.4s ease;
+}
+
+.r-cert-issuer {
+  font: 500 9.5px/1 Inter, sans-serif;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--r-mid);
+}
+
+.r-cert-name {
+  margin-top: 6px;
+  font-size: 12.5px;
+  font-weight: 600;
+}
+
+.r-cert-meta {
+  margin-top: 6px;
+  font-size: 11px;
+  color: var(--r-mid);
+}
+
+/* ── footer ──────────────────────────────────────────────────────── */
+
+.r-footer {
+  margin-top: 44px;
+  padding-top: 28px;
+  border-top: 1px solid var(--r-line);
+  display: flex;
+  justify-content: center;
+  transition: border-color 0.4s ease;
+}
+
+.r-footer .btn {
+  background: var(--r-ink);
+  color: var(--r-bg);
+}
+
+@media (max-width: 560px) {
+  .r-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .r-contact {
+    text-align: left;
+  }
+}
+/* ── brand alignment additions ──────────────────────────────────────── */
+.r-header h1 {
+  font-family: "Fraunces", serif;
+  font-weight: 500;
+}
+
+.r-footer .btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 28px;
+  border-radius: 999px;
+  font: 500 11px/1 Inter, sans-serif;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  transition: opacity 0.25s ease;
+}
+.r-footer .btn:hover { opacity: 0.85; }
