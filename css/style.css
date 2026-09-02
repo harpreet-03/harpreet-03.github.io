@@ -149,7 +149,7 @@ body {
 /* ── Magnetic buttons ────────────────────────────────────────────────── */
 .magnetic-wrap { display: inline-block; position: relative; }
 
-/* ── Loader ──────────────────────────────────────────────────────────── */
+/* ── Loader: viewfinder reveal ───────────────────────────────────────── */
 #loader {
   position: fixed;
   inset: 0;
@@ -157,16 +157,84 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
+  overflow: hidden;
   background: #1d1d1c;
   transition: opacity 0.6s ease, visibility 0.6s ease;
 }
+#loader::before {
+  /* faint ambient texture — same gradient recipe as the hero/project
+     tiles, kept subtle so it doesn't compete with the mark itself. */
+  content: "";
+  position: absolute;
+  inset: -15%;
+  background-image:
+    radial-gradient(ellipse 50% 40% at 25% 30%, rgba(79,83,67,0.30), transparent 60%),
+    radial-gradient(ellipse 45% 35% at 78% 75%, rgba(212,193,156,0.14), transparent 60%);
+  animation: heroDrift 10s ease-in-out infinite alternate;
+}
+.loader-frame {
+  position: relative;
+  z-index: 1;
+  width: 132px;
+  height: 132px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.6s cubic-bezier(.4,0,.2,1), filter 0.6s ease, opacity 0.6s ease;
+}
+.loader-corner {
+  position: absolute;
+  width: 22px;
+  height: 22px;
+  border: 1.5px solid rgba(212,193,156,0.7);
+  opacity: 0;
+  animation: loaderCornerIn 0.7s cubic-bezier(.16,1,.3,1) forwards;
+}
+.loader-corner.tl { top: 0; left: 0; border-right: none; border-bottom: none; --dx: -14px; --dy: -14px; }
+.loader-corner.tr { top: 0; right: 0; border-left: none; border-bottom: none; --dx: 14px; --dy: -14px; animation-delay: 0.08s; }
+.loader-corner.bl { bottom: 0; left: 0; border-right: none; border-top: none; --dx: -14px; --dy: 14px; animation-delay: 0.08s; }
+.loader-corner.br { bottom: 0; right: 0; border-left: none; border-top: none; --dx: 14px; --dy: 14px; animation-delay: 0.16s; }
+.loader-mark {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.65rem;
+}
 #loader .loader-word {
   font-family: "Fraunces", serif;
-  font-size: clamp(2rem, 6vw, 4.5rem);
+  font-size: clamp(1.8rem, 5vw, 2.75rem);
   letter-spacing: -0.02em;
   color: #f3eee2;
+  opacity: 0;
+  animation: loaderWordIn 0.8s cubic-bezier(.16,1,.3,1) forwards;
+  animation-delay: 0.16s;
+}
+.loader-line {
+  width: 46px;
+  height: 1px;
+  background: #d4c19c;
+  transform: scaleX(0);
+  animation: loaderLineGrow 0.6s cubic-bezier(.16,1,.3,1) forwards;
+  animation-delay: 0.56s;
+}
+@keyframes loaderCornerIn {
+  0% { opacity: 0; transform: translate(var(--dx), var(--dy)) scale(0.7); }
+  100% { opacity: 1; transform: translate(0,0) scale(1); }
+}
+@keyframes loaderWordIn {
+  0% { opacity: 0; transform: translateY(8px) scale(0.94); filter: blur(6px); }
+  100% { opacity: 1; transform: translateY(0) scale(1); filter: blur(0); }
+}
+@keyframes loaderLineGrow {
+  to { transform: scaleX(1); }
 }
 #loader.is-done { opacity: 0; visibility: hidden; pointer-events: none; }
+#loader.is-done .loader-frame { transform: scale(1.06); filter: blur(4px); opacity: 0; }
+@media (prefers-reduced-motion: reduce) {
+  #loader::before { animation: none; }
+  .loader-corner, #loader .loader-word, .loader-line { animation: none; opacity: 1; transform: none; filter: none; }
+}
 html.is-loading { overflow: hidden; }
 
 /* ── Nav mobile menu ─────────────────────────────────────────────────── */
@@ -393,19 +461,34 @@ html.is-loading { overflow: hidden; }
 
 /* ── Certification cards ─────────────────────────────────────────────── */
 .cert-card {
-  background: #eae5d9;
+  flex: 0 0 auto;
+  width: 260px;
+  scroll-snap-align: start;
+  background: #f8f6f0;
   border-radius: 22px;
   overflow: hidden;
-  border: 1px solid rgba(0,0,0,0.06);
-  transition: transform 0.4s cubic-bezier(.16,1,.3,1);
+  border: 1px solid rgba(29,29,28,0.10);
+  box-shadow: 0 1px 2px rgba(29,29,28,0.04), 0 16px 32px -20px rgba(29,29,28,0.18);
+  transition: transform 0.4s cubic-bezier(.16,1,.3,1), box-shadow 0.4s cubic-bezier(.16,1,.3,1), border-color 0.4s ease;
 }
-.cert-card:hover { transform: translateY(-4px); }
+@media (min-width: 640px) { .cert-card { width: 300px; } }
+.cert-card:hover {
+  transform: translateY(-6px);
+  border-color: rgba(29,29,28,0.16);
+  box-shadow: 0 1px 2px rgba(29,29,28,0.05), 0 28px 48px -22px rgba(29,29,28,0.28);
+}
+.cert-card:focus-visible { outline: 2px solid #4f5343; outline-offset: 3px; }
 .cert-card .cert-thumb {
   height: 180px;
   overflow: hidden;
   background: #d3cdc0;
+  border-bottom: 1px solid rgba(29,29,28,0.08);
 }
-.cert-card .cert-thumb img { width: 100%; height: 100%; object-fit: cover; }
+.cert-card .cert-thumb img {
+  width: 100%; height: 100%; object-fit: cover;
+  transition: transform 0.6s cubic-bezier(.16,1,.3,1);
+}
+.cert-card:hover .cert-thumb img { transform: scale(1.06); }
 
 /* ── Focus / engineering cards ───────────────────────────────────────── */
 .focus-card {

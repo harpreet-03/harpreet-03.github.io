@@ -47,16 +47,25 @@
       }
     }
   }
-
-  // ...
-
 </script>
 </head>
 <body class="relative bg-cream text-dark font-sans overflow-x-hidden selection:bg-moss selection:text-surface">
 
-  <!-- Loader -->
+  <!-- Loader: a small "viewfinder" reveal — corner brackets draw inward
+       like a camera focusing, the HS mark fades up through a soft blur,
+       then a thin rule grows underneath. Echoes the grid-line + sand/moss
+       gradient language used in the hero and project tiles. -->
   <div id="loader">
-    <span class="loader-word">HS</span>
+    <div class="loader-frame">
+      <span class="loader-corner tl"></span>
+      <span class="loader-corner tr"></span>
+      <span class="loader-corner bl"></span>
+      <span class="loader-corner br"></span>
+      <div class="loader-mark">
+        <span class="loader-word">HS</span>
+        <span class="loader-line"></span>
+      </div>
+    </div>
   </div>
 
   <!-- WebGL ambient background -->
@@ -377,9 +386,19 @@
           <div class="eyebrow uppercase text-dark/50 mb-3">Certifications</div>
           <h2 class="font-serif text-4xl lg:text-6xl tracking-tight">Always<br>learning.</h2>
         </div>
-        <p class="text-dark/60 font-light max-w-xs">Selected certifications spanning machine learning, generative AI, and full-stack development.</p>
+        <div class="flex items-center gap-6">
+          <p class="text-dark/60 font-light max-w-xs">Selected certifications spanning machine learning, generative AI, and full-stack development.</p>
+          <div class="hidden sm:flex items-center gap-3 flex-shrink-0">
+            <button id="cPrev" type="button" aria-label="Previous certification" class="w-11 h-11 rounded-full border border-dark/20 flex items-center justify-center hover:bg-dark hover:text-cream hover:border-dark transition-colors">
+              <iconify-icon icon="solar:arrow-left-linear" width="18"></iconify-icon>
+            </button>
+            <button id="cNext" type="button" aria-label="Next certification" class="w-11 h-11 rounded-full border border-dark/20 flex items-center justify-center hover:bg-dark hover:text-cream hover:border-dark transition-colors">
+              <iconify-icon icon="solar:arrow-right-linear" width="18"></iconify-icon>
+            </button>
+          </div>
+        </div>
       </div>
-      <div id="certGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6"></div>
+      <div id="certGrid" class="flex gap-6 overflow-x-auto hide-scrollbar snap-x snap-mandatory pb-4 -mx-6 px-6 lg:-mx-12 lg:px-12"></div>
     </div>
   </section>
 

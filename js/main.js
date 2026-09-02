@@ -222,6 +222,36 @@ renderSkillField();
 })();
 
 /* ═══════════════════════════════════════════════════════════════════════
+   CERTIFICATION CAROUSEL ARROWS
+   ═══════════════════════════════════════════════════════════════════════ */
+(function certCarousel() {
+  const track = document.getElementById("certGrid");
+  const prev = document.getElementById("cPrev");
+  const next = document.getElementById("cNext");
+  if (!track || !prev || !next) return;
+
+  const step = () => {
+    const card = track.querySelector(".cert-card");
+    const gap = 24; // matches gap-6
+    return card ? card.getBoundingClientRect().width + gap : 300;
+  };
+
+  prev.addEventListener("click", () => track.scrollBy({ left: -step(), behavior: "smooth" }));
+  next.addEventListener("click", () => track.scrollBy({ left: step(), behavior: "smooth" }));
+
+  const syncButtons = () => {
+    const max = track.scrollWidth - track.clientWidth - 4;
+    prev.disabled = track.scrollLeft <= 4;
+    next.disabled = track.scrollLeft >= max;
+    prev.classList.toggle("opacity-30", prev.disabled);
+    next.classList.toggle("opacity-30", next.disabled);
+  };
+  track.addEventListener("scroll", syncButtons, { passive: true });
+  window.addEventListener("resize", syncButtons);
+  setTimeout(syncButtons, 300);
+})();
+
+/* ═══════════════════════════════════════════════════════════════════════
    PROJECT DETAIL MODAL
    ═══════════════════════════════════════════════════════════════════════ */
 (function projectModal() {
@@ -450,36 +480,29 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   /* Apple-style hero exit: the frame is already an inset rounded card
-     at rest. As the hero scrolls out of view, it insets and rounds
-     further and eases back slightly in scale — a "closing into a
-     card" feel instead of just cutting to the next section. Tied to
-     scroll position (scrub), not time, so it tracks the gesture 1:1. */
+     at rest. As the hero scrolls out of view, it eases down in scale —
+     a "closing into a card" feel instead of just cutting to the next
+     section. Tied to scroll position (scrub), not time, so it tracks
+     the gesture 1:1.
+     Deliberately transform-only: earlier this also animated the CSS
+     `inset` custom property, which forces a full layout reflow on a
+     viewport-sized element every single scroll frame — that's what
+     made scrolling feel heavy. `scale` is compositor-only (GPU), so
+     shrinking the frame this way gets the same "closing card" look —
+     it reveals more of the dark margin around it as it scales down —
+     at a fraction of the cost. */
   const heroFrame = document.querySelector(".hero-frame");
   if (heroFrame && typeof ScrollTrigger !== "undefined") {
-    gsap.matchMedia().add(
-      {
-        isDesktop: "(min-width: 1024px)",
-        isTablet: "(min-width: 640px) and (max-width: 1023.98px)",
-        isMobile: "(max-width: 639.98px)",
+    gsap.to(heroFrame, {
+      scale: 0.92,
+      ease: "none",
+      scrollTrigger: {
+        trigger: "#top",
+        start: "top top",
+        end: "bottom top",
+        scrub: true,
       },
-      (context) => {
-        const { isDesktop, isTablet } = context.conditions;
-        const endInset = isDesktop ? "48px" : isTablet ? "36px" : "22px";
-        const endRadius = isDesktop ? "60px" : isTablet ? "46px" : "34px";
-        gsap.to(heroFrame, {
-          "--hero-inset": endInset,
-          "--hero-radius": endRadius,
-          scale: 0.95,
-          ease: "none",
-          scrollTrigger: {
-            trigger: "#top",
-            start: "top top",
-            end: "bottom top",
-            scrub: 0.4,
-          },
-        });
-      }
-    );
+    });
   }
 
   gsap.utils.toArray(".gsap-fade-up").forEach((section) => {
