@@ -351,112 +351,125 @@ html.is-loading { overflow: hidden; }
   .proj-media-pattern { animation: none; }
 }
 
-/* ── Skill field: bento grid, categorized cards, mouse-tracked spotlight ──
-   Desktop: 3 columns — a "wide" tile (2 cols) paired with a "narrow"
-   tile (1 col) per row. Tablet: 2 columns, wide tiles go full-width.
-   Mobile: everything stacks to a single column.                       */
-.bento-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  grid-auto-rows: auto;
-  align-items: stretch;
-  gap: 1.1rem;
-}
-.bento-grid .bento-wide { grid-column: span 2; }
-.bento-grid .bento-narrow { grid-column: span 1; }
-
-/* Below desktop, the wide/narrow pairing doesn't tile evenly across
-   2 columns (it leaves ragged gaps), so tablet and mobile both drop
-   to a single clean column instead — every card full width. */
-@media (max-width: 1024px) {
-  .bento-grid { grid-template-columns: 1fr; gap: 1rem; }
-  .bento-grid .bento-wide,
-  .bento-grid .bento-narrow { grid-column: span 1; }
-}
-@media (max-width: 640px) {
-  .bento-grid { gap: 0.9rem; }
-}
-
-.skill-card {
+/* ── Skills: infinite ticker + tabbed grid ───────────────────────────────
+   Two compact components instead of a tall grid: a self-looping marquee
+   of the foundational languages/tools everyone recognizes at a glance,
+   and a small tabbed panel underneath for the deeper stack — swaps
+   content on click instead of listing everything at once. */
+.skills-ticker {
   position: relative;
-  isolation: isolate;
-  background: #1d1d1c;
-  border: 1px solid rgba(255,255,255,0.08);
-  border-radius: 24px;
-  padding: 1.75rem;
   overflow: hidden;
-  height: 100%;
-  transition: border-color 0.35s ease, transform 0.35s ease, box-shadow 0.35s ease;
+  padding: 1.1rem 0;
+  margin-bottom: 1.5rem;
+  border-radius: 20px;
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.07);
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+          mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
 }
-.skill-card:hover {
-  border-color: rgba(212,193,156,0.35);
-  transform: translateY(-4px) scale(1.01);
-  box-shadow: 0 24px 60px -24px rgba(0,0,0,0.55);
-}
-.skill-card::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  z-index: 0;
-  opacity: 0;
-  transition: opacity 0.35s ease;
-  background: radial-gradient(220px circle at var(--mx, 50%) var(--my, 50%), rgba(212,193,156,0.16), transparent 70%);
-  pointer-events: none;
-}
-.skill-card:hover::before { opacity: 1; }
-.skill-card-head {
-  position: relative;
-  z-index: 1;
+.skills-ticker-track {
   display: flex;
-  align-items: center;
-  gap: 0.6rem;
-  margin-bottom: 1.1rem;
+  width: max-content;
+  gap: 0.75rem;
+  padding: 0 1.25rem;
+  animation: skillsTickerScroll 26s linear infinite;
 }
-.skill-icon {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 32px;
-  height: 32px;
-  border-radius: 10px;
-  background: rgba(212,193,156,0.12);
-  color: #d4c19c;
-  flex-shrink: 0;
-  transition: transform 0.35s ease, background 0.35s ease;
+.skills-ticker:hover .skills-ticker-track,
+.skills-ticker:focus-within .skills-ticker-track { animation-play-state: paused; }
+@keyframes skillsTickerScroll {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
 }
-.skill-card:hover .skill-icon { transform: rotate(-8deg) scale(1.06); background: rgba(212,193,156,0.2); }
-.skill-group-label {
+.ticker-chip {
+  flex: 0 0 auto;
   font-family: "JetBrains Mono", monospace;
-  font-size: 0.66rem;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: #8f8e88;
-  display: block;
+  font-size: 0.78rem;
+  letter-spacing: 0.02em;
+  color: rgba(243,238,226,0.65);
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.08);
+  padding: 0.55rem 1.1rem;
+  border-radius: 999px;
+  cursor: default;
+  transition: transform 0.3s cubic-bezier(.16,1,.3,1), color 0.3s ease, background 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
 }
-.skill-chip-row {
-  position: relative;
-  z-index: 1;
+.ticker-chip:hover {
+  transform: scale(1.08);
+  color: #1d1d1c;
+  background: #d4c19c;
+  border-color: #d4c19c;
+  box-shadow: 0 0 24px rgba(212,193,156,0.4);
+}
+
+.skills-tabs-wrap {
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.07);
+  border-radius: 24px;
+  padding: 1.5rem;
+}
+.skills-tabs {
   display: flex;
   flex-wrap: wrap;
-  gap: 8px;
+  gap: 0.5rem;
+  margin-bottom: 1.25rem;
 }
-.skill-node {
+.skills-tab {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
   font-family: "JetBrains Mono", monospace;
-  font-size: 0.72rem;
-  letter-spacing: 0.01em;
+  font-size: 0.66rem;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  color: rgba(243,238,226,0.55);
+  background: transparent;
+  border: 1px solid rgba(255,255,255,0.09);
+  padding: 0.55rem 1rem;
+  border-radius: 999px;
+  cursor: pointer;
+  transition: color 0.3s ease, background 0.3s ease, border-color 0.3s ease;
+}
+.skills-tab:hover { color: rgba(243,238,226,0.85); border-color: rgba(255,255,255,0.2); }
+.skills-tab.is-active {
+  color: #1d1d1c;
+  background: #d4c19c;
+  border-color: #d4c19c;
+}
+.skills-panel {
+  display: flex;
+  flex-wrap: wrap;
+  align-content: flex-start;
+  gap: 0.6rem;
+  min-height: 42px;
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity 0.4s cubic-bezier(.16,1,.3,1), transform 0.4s cubic-bezier(.16,1,.3,1);
+}
+.skills-panel.is-visible { opacity: 1; transform: translateY(0); }
+.skills-panel .skill-node {
+  font-family: "JetBrains Mono", monospace;
+  font-size: 0.75rem;
   color: rgba(243,238,226,0.72);
   background: rgba(255,255,255,0.04);
   border: 1px solid rgba(255,255,255,0.09);
-  padding: 6px 12px;
+  padding: 8px 14px;
   border-radius: 999px;
   white-space: nowrap;
   transition: color 0.2s ease, background 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
 }
-.skill-node:hover, .skill-node:focus-visible {
+.skills-panel .skill-node:hover {
   color: #1d1d1c;
   background: #d4c19c;
   border-color: #d4c19c;
   transform: translateY(-2px);
+}
+@media (prefers-reduced-motion: reduce) {
+  .skills-ticker-track { animation: none; }
+}
+@media (max-width: 640px) {
+  .skills-tabs-wrap { padding: 1.1rem; border-radius: 20px; }
+  .skills-tab { font-size: 0.6rem; padding: 0.5rem 0.75rem; }
+  .ticker-chip { font-size: 0.7rem; padding: 0.5rem 0.9rem; }
 }
 
 /* ── Certification cards ─────────────────────────────────────────────── */

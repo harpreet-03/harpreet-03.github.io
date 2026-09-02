@@ -66,65 +66,105 @@ function renderProjects() {
    readable categories for display. A skill that doesn't match any
    pattern below falls into "Other" rather than being dropped.
    ═══════════════════════════════════════════════════════════════════════ */
-function renderSkillField() {
-  const field = document.getElementById("skillField");
-  if (!field || typeof CORE_SKILLS === "undefined") return;
+function renderSkills() {
+  if (typeof CORE_SKILLS === "undefined") return;
+  const tickerEl = document.getElementById("skillsTicker");
+  const tabsEl = document.getElementById("skillsTabs");
+  const panelEl = document.getElementById("skillsPanel");
+  if (!tickerEl || !tabsEl || !panelEl) return;
 
-  /* Order here is the bento fill order: a "wide" tile (2 cols) paired
-     with a "narrow" tile (1 col) fills each row evenly on a 3-column
-     desktop grid — see .bento-grid in style.css. */
-  const groups = [
+  /* Foundational languages + universal tooling live in the always-visible
+     scrolling ticker rather than a tab — the stuff everyone recognizes
+     at a glance. */
+  const TICKER_SKILLS = ["Python", "Java", "SQL", "Git", "GitHub", "Docker", "REST APIs"];
+
+  /* Everything else, grouped into tabs with plain, specific headings —
+     "AI & Frameworks" used to lump concepts, APIs, and libraries into
+     one vague bucket, so it's now split by what each thing actually is.
+     Every name below must exist in CORE_SKILLS — the "leftover" safety
+     net further down means a future edit to CORE_SKILLS can never
+     silently vanish from this section, it'll just land in an "Other"
+     tab until it's sorted properly here. */
+  const TABS = [
     {
-      label: "Frameworks & Libraries",
-      icon: "solar:widget-5-linear",
-      size: "wide",
-      match: ["PyTorch", "TensorFlow", "Scikit-learn", "LangChain", "LangGraph", "FastAPI",
-        "HuggingFace Transformers", "SentenceTransformers", "spaCy", "NumPy", "Pandas", "XGBoost"],
+      label: "AI Concepts",
+      icon: "solar:brain-linear",
+      match: ["LLMs", "RAG", "NLP", "Machine Learning", "Deep Learning", "Prompt Engineering",
+        "A/B Prompt Testing", "Hyperparameter Tuning", "Agentic Workflows", "Agent Design",
+        "Tool Calling", "MCP (Model Context Protocol)"],
     },
-    { label: "Languages", icon: "solar:code-square-linear", size: "narrow", match: ["Python", "Java", "JavaScript", "SQL"] },
     {
-      label: "Infra & Data",
-      icon: "solar:server-square-linear",
-      size: "wide",
-      match: ["Google Cloud Platform", "Firebase", "Docker", "Git", "GitHub", "REST APIs",
-        "Streamlit", "PostgreSQL (pgvector)", "ChromaDB", "Redis"],
-    },
-    {
-      label: "Models & APIs",
+      label: "LLM Tools & APIs",
       icon: "solar:link-round-angle-linear",
-      size: "narrow",
-      match: ["OpenAI GPT-3.5/4", "Google Gemini API", "Anthropic Claude API", "Ollama", "n8n"],
+      match: ["OpenAI GPT-3.5/4", "Google Gemini API", "Anthropic Claude API", "Ollama", "n8n",
+        "LangChain", "LangGraph"],
     },
     {
-      label: "AI / LLMs",
-      icon: "solar:cpu-bolt-linear",
-      size: "wide",
-      match: ["LLMs", "RAG", "NLP", "Deep Learning", "Agentic Workflows", "Agent Design",
-        "Prompt Engineering", "A/B Prompt Testing", "Hyperparameter Tuning"],
+      label: "ML Frameworks",
+      icon: "solar:widget-5-linear",
+      match: ["PyTorch", "TensorFlow", "Scikit-learn", "FastAPI", "HuggingFace Transformers",
+        "SentenceTransformers", "spaCy", "NumPy", "Pandas", "XGBoost"],
     },
-    { label: "Fundamentals", icon: "solar:square-academic-cap-linear", size: "narrow", match: ["Data Structures & Algorithms", "Operating Systems", "DBMS", "OOP"] },
+    {
+      label: "Infrastructure",
+      icon: "solar:server-square-linear",
+      match: ["Firebase", "Streamlit", "PostgreSQL", "ChromaDB"],
+    },
+    {
+      label: "CS Fundamentals",
+      icon: "solar:square-academic-cap-linear",
+      match: ["Data Structures & Algorithms", "Operating Systems", "DBMS", "Object-Oriented Programming"],
+    },
   ];
 
-  const bucketed = new Set();
-  const grouped = groups.map((g) => ({
-    ...g,
-    skills: CORE_SKILLS.filter((s) => g.match.includes(s) && (bucketed.add(s), true)),
-  })).filter((g) => g.skills.length);
+  /* ── Ticker: build the strip, then duplicate it once so the CSS
+     marquee (translateX 0 → -50%) loops with no visible seam. ── */
+  const tickerItems = TICKER_SKILLS.filter((s) => CORE_SKILLS.includes(s));
+  const tickerHtml = tickerItems.map((s) => `<span class="ticker-chip">${s}</span>`).join("");
+  tickerEl.innerHTML = tickerHtml + tickerHtml;
 
-  const leftover = CORE_SKILLS.filter((s) => !bucketed.has(s));
-  if (leftover.length) grouped.push({ label: "Other", icon: "solar:widget-4-linear", size: "narrow", skills: leftover });
+  /* ── Tabs + panel ── */
+  const used = new Set(TICKER_SKILLS);
+  const groups = TABS.map((t) => {
+    const skills = t.match.filter((s) => CORE_SKILLS.includes(s));
+    skills.forEach((s) => used.add(s));
+    return { ...t, skills };
+  }).filter((t) => t.skills.length);
 
-  field.innerHTML = grouped.map((g) => `
-    <div class="skill-card bento-${g.size}" data-skill-card>
-      <div class="skill-card-head">
-        <span class="skill-icon"><iconify-icon icon="${g.icon}" width="18"></iconify-icon></span>
-        <span class="skill-group-label">${g.label}</span>
-      </div>
-      <div class="skill-chip-row">
-        ${g.skills.map((s) => `<span class="skill-node" tabindex="0">${s}</span>`).join("")}
-      </div>
-    </div>
+  const leftover = CORE_SKILLS.filter((s) => !used.has(s));
+  if (leftover.length) groups.push({ label: "Other", icon: "solar:widget-4-linear", skills: leftover });
+
+  tabsEl.innerHTML = groups.map((t, i) => `
+    <button type="button" class="skills-tab${i === 0 ? " is-active" : ""}" data-tab-index="${i}" role="tab" aria-selected="${i === 0 ? "true" : "false"}">
+      <iconify-icon icon="${t.icon}" width="15"></iconify-icon>
+      <span>${t.label}</span>
+    </button>
   `).join("");
+
+  const renderPanel = (index) => {
+    const t = groups[index];
+    if (!t) return;
+    panelEl.classList.remove("is-visible");
+    // brief pause lets the fade/slide-out finish before the new tags swap in
+    setTimeout(() => {
+      panelEl.innerHTML = t.skills.map((s) => `<span class="skill-node">${s}</span>`).join("");
+      panelEl.classList.add("is-visible");
+    }, 150);
+  };
+  renderPanel(0);
+
+  tabsEl.querySelectorAll(".skills-tab").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      if (btn.classList.contains("is-active")) return;
+      tabsEl.querySelectorAll(".skills-tab").forEach((b) => {
+        b.classList.remove("is-active");
+        b.setAttribute("aria-selected", "false");
+      });
+      btn.classList.add("is-active");
+      btn.setAttribute("aria-selected", "true");
+      renderPanel(Number(btn.dataset.tabIndex));
+    });
+  });
 }
 
 /* ═══════════════════════════════════════════════════════════════════════
@@ -189,7 +229,7 @@ applySiteLinks();
 applyPublication();
 renderProjects();
 renderCertifications();
-renderSkillField();
+renderSkills();
 
 /* ═══════════════════════════════════════════════════════════════════════
    PROJECT CAROUSEL ARROWS
@@ -526,11 +566,11 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
-  const skillCards = gsap.utils.toArray(".skill-card");
-  if (skillCards.length) {
-    gsap.from(skillCards, {
-      scrollTrigger: { trigger: "#skillField", start: "top 85%" },
-      y: 28, opacity: 0, scale: 0.97, duration: 0.6, stagger: 0.08, ease: "power2.out",
+  const skillsSection = document.querySelector(".skills-tabs-wrap");
+  if (skillsSection) {
+    gsap.from([".skills-ticker", ".skills-tabs-wrap"], {
+      scrollTrigger: { trigger: skillsSection, start: "top 85%" },
+      y: 24, opacity: 0, duration: 0.7, stagger: 0.12, ease: "power2.out",
     });
   }
 
@@ -547,16 +587,6 @@ document.addEventListener("DOMContentLoaded", () => {
       gsap.to(target, { x: 0, y: 0, duration: 0.7, ease: "elastic.out(1, 0.3)" });
     });
   });
-});
-
-/* Custom mouse-tracker spotlight on skill cards — a hover affordance,
-   kept active even under reduced-motion since nothing here autoplays. */
-document.addEventListener("pointermove", (e) => {
-  const card = e.target.closest(".skill-card");
-  if (!card) return;
-  const rect = card.getBoundingClientRect();
-  card.style.setProperty("--mx", `${e.clientX - rect.left}px`);
-  card.style.setProperty("--my", `${e.clientY - rect.top}px`);
 });
 
 /* ═══════════════════════════════════════════════════════════════════════

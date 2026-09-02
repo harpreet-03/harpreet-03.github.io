@@ -22,19 +22,27 @@ const SITE_LINKS = {
 
 
 /* ── Core skills ───────────────────────────────────────────────────────
-   Full skill inventory aligned with the current resume. The visual system
-   lays these out as readable, horizontal floating nodes rather than rotating
-   the labels themselves. */
+   Full skill inventory aligned with the current resume. The Skills
+   section (js/main.js → renderSkills()) reads this flat list and sorts
+   it into two pieces on its own: an always-visible scrolling ticker of
+   foundational languages/tools, and a tabbed grid — AI Concepts, LLM
+   Tools & APIs, ML Frameworks, Infrastructure, CS Fundamentals — for
+   everything else. Add or remove a skill here and it'll show up in the
+   right place automatically; anything renderSkills() doesn't recognize
+   yet falls into an auto-generated "Other" tab instead of disappearing,
+   so nothing ever gets silently dropped. */
 const CORE_SKILLS = [
-  "Python", "Java", "SQL", "JavaScript",
-  "LLMs", "RAG", "NLP", "Deep Learning", "Agentic Workflows",
-  "Prompt Engineering", "Agent Design", "A/B Prompt Testing", "Hyperparameter Tuning",
+  "Python", "Java", "SQL",
+  "Agentic Workflows", "Agent Design", "Tool Calling", "MCP (Model Context Protocol)",
+  "LLMs", "RAG", "NLP", "Machine Learning", "Deep Learning",
+  "Prompt Engineering", "A/B Prompt Testing", "Hyperparameter Tuning",
   "OpenAI GPT-3.5/4", "Google Gemini API", "Anthropic Claude API", "n8n", "Ollama",
-  "PyTorch", "TensorFlow", "Scikit-learn", "LangChain", "LangGraph", "FastAPI",
+  "LangChain", "LangGraph", "FastAPI",
+  "PyTorch", "TensorFlow", "Scikit-learn",
   "HuggingFace Transformers", "SentenceTransformers", "spaCy", "NumPy", "Pandas", "XGBoost",
-  "Google Cloud Platform", "Firebase", "Docker", "Git", "GitHub", "REST APIs", "Streamlit",
-  "PostgreSQL (pgvector)", "ChromaDB", "Redis",
-  "Data Structures & Algorithms", "Operating Systems", "DBMS", "OOP"
+  "Firebase", "Docker", "Git", "GitHub", "REST APIs", "Streamlit",
+  "PostgreSQL", "ChromaDB",
+  "Data Structures & Algorithms", "Operating Systems", "DBMS", "Object-Oriented Programming"
 ];
 
 /* ── Projects ───────────────────────────────────────────────────────────
