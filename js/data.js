@@ -121,6 +121,7 @@ const PROJECTS = [
     description:
       "Personal German vocabulary tracker and Duolingo companion with spaced-repetition flashcard reviews, mistake logging, and activity streaks, rendered server-side and deployed on Netlify.",
     link: "https://remember-german.netlify.app/",
+    image: "./assets/images/DeutschVault.png",
   },
 
   {
