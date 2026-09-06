@@ -112,7 +112,17 @@ const PROJECTS = [
     link: "https://github.com/harpreet-03/University_Assistant",
     image: "./assets/images/EduVerse_AI.png",
   },
-  
+  {
+    tag: "Full Stack · Language Learning",
+    icon: "solar:notebook-bookmark-linear",
+    name: "DeutschVault",
+    subtitle: "Personal German Vocabulary & Spaced-Repetition App",
+    stack: ["TanStack Start", "React 19", "PostgreSQL", "Drizzle ORM", "Tailwind CSS"],
+    description:
+      "Personal German vocabulary tracker and Duolingo companion with spaced-repetition flashcard reviews, mistake logging, and activity streaks, rendered server-side and deployed on Netlify.",
+    link: "https://remember-german.netlify.app/",
+  },
+
   {
     tag: "NLP · Research",
     icon: "solar:translation-linear",
